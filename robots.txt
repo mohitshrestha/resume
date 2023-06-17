@@ -1,1 +1,1 @@
-Sitemap: https://mohitshrestha.github.io/github_actions_quarto_demo/sitemap.xml
+Sitemap: https://github.com/mohitshrestha/resume/sitemap.xml

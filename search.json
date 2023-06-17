@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GitHub Actions for Quarto Demo",
+    "section": "",
+    "text": "This is a Quarto website to demonstrate the use of GitHub Actions for Quarto Website/Projects.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
     "objectID": "import_data_and_generate_report.html",
     "href": "import_data_and_generate_report.html",
     "title": "Import Data and Generate Report",
@@ -25,13 +32,6 @@
     "href": "import_data_and_generate_report.html#generate-report",
     "title": "Import Data and Generate Report",
     "section": "Generate Report",
-    "text": "Generate Report\nReport last updated on 2023-06-16 21:41:46.\n\n\nShow the code\n# The data is publicly available so we don't need to authenticate\ngs4_deauth()\n\nsurvey_data &lt;- read_sheet(\"https://docs.google.com/spreadsheets/d/13kfPtyQP1xmL4Rn6rfJHgJcAblfH7pxS5RvdmGe6BHg/edit?usp=sharing\")\n\nsurvey_data %&gt;%\n  gt()\n\n\n\n\n\n\n  \n    \n    \n      Timestamp\n      What city do you live in?\n      What state or province do you live in?\n      What country do you live in?\n    \n  \n  \n    2023-05-22 11:11:57\nPortland\nOregon\nUnited States\n    2023-05-22 13:54:52\nVancouver\nBritish Columbia\nCanada\n    2023-05-25 15:25:42\nNew York\nNew York\nUSA\n    2023-05-29 08:15:25\njember\njawa timur\nindonesia\n    2023-05-30 02:41:11\nCuritiba\nPR\nBrazil"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "GitHub Actions for Quarto Demo",
-    "section": "",
-    "text": "This is a Quarto website to demonstrate the use of GitHub Actions for Quarto Website/Projects.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Generate Report\nReport last updated on 2023-06-16 22:01:12.\n\n\nShow the code\n# The data is publicly available so we don't need to authenticate\ngs4_deauth()\n\nsurvey_data &lt;- read_sheet(\"https://docs.google.com/spreadsheets/d/13kfPtyQP1xmL4Rn6rfJHgJcAblfH7pxS5RvdmGe6BHg/edit?usp=sharing\")\n\nsurvey_data %&gt;%\n  gt()\n\n\n\n\n\n\n  \n    \n    \n      Timestamp\n      What city do you live in?\n      What state or province do you live in?\n      What country do you live in?\n    \n  \n  \n    2023-05-22 11:11:57\nPortland\nOregon\nUnited States\n    2023-05-22 13:54:52\nVancouver\nBritish Columbia\nCanada\n    2023-05-25 15:25:42\nNew York\nNew York\nUSA\n    2023-05-29 08:15:25\njember\njawa timur\nindonesia\n    2023-05-30 02:41:11\nCuritiba\nPR\nBrazil"
   }
 ]
