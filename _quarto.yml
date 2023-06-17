@@ -3,13 +3,13 @@ project:
   output-dir: docs
 
 website:
-  title: "GitHub Actions for Quarto Demo"
+  title: "Resume for Mohit Shrestha"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: import_data_and_generate_report.qmd
-        text: Import Data and Generate Report
+      - href: resume.qmd
+        text: Resume
 
 format:
   html:
