@@ -1,0 +1,58 @@
+---
+title: "Import Data and Generate Report"
+author: "Mohit Shrestha"
+format: 
+  html:
+    code-fold: true
+    code-tools: true
+    code-summary: "Show the code"
+
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+---
+
+## Import Libraries/Packages
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+library(tidyverse)
+library(googlesheets4)
+library(gt)
+```
+
+## Import Data
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# The data is publicly available so we don't need to authenticate
+gs4_deauth()
+
+survey_data <- read_sheet("https://docs.google.com/spreadsheets/d/13kfPtyQP1xmL4Rn6rfJHgJcAblfH7pxS5RvdmGe6BHg/edit#gid=564559734")
+
+survey_data |> 
+    write_rds("survey_data.rds")
+```
+
+## Generate Report
+
+Report last updated on `r now(tzone = "America/Los_Angeles")`.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# The data is publicly available so we don't need to authenticate
+gs4_deauth()
+
+survey_data <- read_sheet("https://docs.google.com/spreadsheets/d/13kfPtyQP1xmL4Rn6rfJHgJcAblfH7pxS5RvdmGe6BHg/edit?usp=sharing")
+
+survey_data %>%
+  gt()
+```

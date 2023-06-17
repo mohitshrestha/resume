@@ -1,0 +1,9 @@
+---
+title: "GitHub Actions for Quarto Demo"
+author: "Mohit Shrestha"
+editor: visual
+---
+
+This is a Quarto website to demonstrate the use of GitHub Actions for Quarto Website/Projects.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

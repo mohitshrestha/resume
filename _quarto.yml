@@ -1,0 +1,21 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "GitHub Actions for Quarto Demo"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: import_data_and_generate_report.qmd
+        text: Import Data and Generate Report
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
