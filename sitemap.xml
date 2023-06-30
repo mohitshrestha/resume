@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/mohitshrestha/resume/index.html</loc>
-    <lastmod>2023-06-30T09:27:31.732Z</lastmod>
+    <lastmod>2023-06-30T22:02:27.466Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/mohitshrestha/resume/create_sections_functions.html</loc>
+    <lastmod>2023-06-30T22:02:18.858Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/mohitshrestha/resume/resume.html</loc>
-    <lastmod>2023-06-30T09:27:28.016Z</lastmod>
+    <lastmod>2023-06-30T22:02:23.622Z</lastmod>
   </url>
 </urlset>
