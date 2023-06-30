@@ -1,5 +1,5 @@
 ---
-author: "Mohit Shresthaa"
+author: "Mohit Shrestha"
 ---
 
 <!-- Functions -->
