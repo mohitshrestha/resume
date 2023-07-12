@@ -27,7 +27,7 @@ cv <- googlesheets4::read_sheet(cv_url,
 {{< include create_sections_functions.qmd >}}
 
 ```{r, include=FALSE}
-source("create_sections_functions.r", local = knitr::knit_global())
+#source("create_sections_functions.r", local = knitr::knit_global())
 # or sys.source("your-script.R", envir = knitr::knit_global())
 ```
 
