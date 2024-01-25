@@ -1,1 +1,1 @@
-Sitemap: https://github.com/mohitshrestha/resume/sitemap.xml
+Sitemap: https://mohitshrestha.github.io/resume/sitemap.xml
