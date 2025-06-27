@@ -1,10 +1,14 @@
 ---
 title: ""
+author: ""
+navbar: false
+
 format: 
   html:
     theme: journal
     css: custom.css
 editor: visual
+
 knitr:
   opts_chunk: 
     echo: false
@@ -15,7 +19,10 @@ knitr:
 ```{r}
 #| include: false
 #| cache: false
-googlesheets4::gs4_deauth()
+
+googlesheets4::gs4_auth(path = "service-account.json")
+googlesheets4::gs4_user()
+
 cv_url <- "https://docs.google.com/spreadsheets/d/1nCw7ECSatsVa0cj-8g41b5qf3WX23PcSe3eWOXgkAuI/edit?usp=sharing"
 cv <- googlesheets4::read_sheet(cv_url,
                                 sheet = "entries",
@@ -33,7 +40,7 @@ col_br <- function(col){
     )
 }
 
-col_br_loc <- function(col){
+col_br_location <- function(col){
     dplyr::if_else(
       !is.na(col) & col != "N/A|NA", 
       paste0('<br><i class="fa-solid fa-location-dot"></i> ', col),
@@ -45,7 +52,7 @@ create_section <- function(cv_data, section_name){
   cv_data |>
     dplyr::mutate(in_resume = as.character(in_resume),
                   end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                  loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                  location = dplyr::if_else(location == "Online", NA_character_, location)) |>
     dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
     dplyr::select(section:description_3) |>
     dplyr::arrange(desc(end), desc(start)) |>
@@ -62,13 +69,13 @@ create_section <- function(cv_data, section_name){
     dplyr::mutate(
       main_text =
         glue::glue(
-          "**{title}** <br> *{col_br(institution)}* {col_br_loc(loc)}
+          "**{title}** <br> *{col_br(institution)}* {col_br_location(location)}
           - {col_br(description_1)}
           - {col_br(description_2)} 
           - {col_br(description_3)}"),
       .after = date
     ) |>
-    dplyr::select(-c(start, end, section, title, institution, loc, description_1, description_2, description_3)) |>
+    dplyr::select(-c(start, end, section, title, institution, location, description_1, description_2, description_3)) |>
     gt::gt() |>
     gt::fmt_markdown(columns = c(date, main_text)) |> 
     gt::tab_options(column_labels.hidden = TRUE, table.width = gt::pct(100),
@@ -81,7 +88,7 @@ create_education_section <- function(cv_data, section_name){
   cv_data |>
     dplyr::mutate(in_resume = as.character(in_resume),
                   end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                  loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                  location = dplyr::if_else(location == "Online", NA_character_, location)) |>
     dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
     dplyr::select(section:description_3) |>
     dplyr::arrange(desc(end), desc(start)) |>
@@ -98,10 +105,10 @@ create_education_section <- function(cv_data, section_name){
     dplyr::mutate(
       main_text =
         glue::glue(
-          "**{title}** <br> *{col_br(institution)}* {col_br_loc(loc)} <br> {col_br(description_1)}"),
+          "**{title}** <br> *{col_br(institution)}* {col_br_location(location)} <br> {col_br(description_1)}"),
       .after = date
     ) |>
-    dplyr::select(-c(start, end, section, title, institution, loc, description_1, description_2, description_3)) |>
+    dplyr::select(-c(start, end, section, title, institution, location, description_1, description_2, description_3)) |>
     gt::gt() |>
     gt::fmt_markdown(columns = c(date, main_text)) |>
     gt::tab_options(column_labels.hidden = TRUE, 
@@ -116,7 +123,7 @@ create_projects_section <- function(cv_data, section_name){
     cv_data |>
         dplyr::mutate(in_resume = as.character(in_resume),
                       end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                      loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                      location = dplyr::if_else(location == "Online", NA_character_, location)) |>
         dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
         dplyr::select(section:description_3) |>
         dplyr::arrange(desc(end), desc(start)) |>
@@ -151,7 +158,7 @@ create_projects_section <- function(cv_data, section_name){
         dplyr::mutate(
             main_text = glue::glue("{main_header} {main_description}"),
             .after = date) |> 
-        dplyr::select(-c(start, end, date, section, title, institution, loc, description_1, description_2, description_3, main_header, main_description)) |>
+        dplyr::select(-c(start, end, date, section, title, institution, location, description_1, description_2, description_3, main_header, main_description)) |>
         gt::gt() |>
         #gt::fmt_markdown(columns = c(date, main_text)) |> 
         gt::fmt_markdown(columns = c(main_text)) |> 
@@ -164,7 +171,7 @@ create_projects_section <- function(cv_data, section_name){
 
 <!-- Sidebar -->
 
-::: {#name .grid}
+::::: {#name .grid}
 ::: g-col-4
 <center><a href='https://mohitshrestha.com.np' target='_blank'> ![](https://avatars.githubusercontent.com/u/47285145?v=4){width="80%" style="border-radius: 50%;"}</center>
 
@@ -221,7 +228,7 @@ create_section(cv, "industry_positions")
 create_education_section(cv, "education")
 ```
 :::
-:::
+:::::
 
 ## <i class="fa-solid fa-chalkboard-user"></i> Selected Academic Research and Data Analytics projects
 

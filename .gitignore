@@ -58,3 +58,7 @@ rsconnect/
 # Quarto website folder
 /_site/
 
+# Ignore service account keys
+credentials/
+service-account.json
+

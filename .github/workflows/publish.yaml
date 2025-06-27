@@ -5,43 +5,59 @@
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main]
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 9 * * *'  # Runs every day at 09:00 UTC
 
 name: Quarto Publish
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+
     permissions:
-      contents: write
+      contents: write  # needed to push to gh-pages
+
     steps:
-      - name: Check out repository
+      - name: 📥 Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Quarto
+      - name: 📦 Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      - name: Install R
+      - name: 🧪 Install R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.2.2'
+          r-version: 'release' #or use '4.5.0'
 
-      # - name: Install R Dependencies
+      # - name: 📚 Install R Dependencies
       #   uses: r-lib/actions/setup-renv@v2
       #   with:
       #     cache-version: 1
-      
-      - name: Manually Install packages
+
+      - name: 📚 Manually Install packages
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
             any::tidyverse
             any::googlesheets4
             any::gt
+            any::pagedown
+            any::pdftools
+            any::fs
 
-      - name: Render and Publish
+      - name: 🔐 Write service account key to file
+        run: echo "${{ secrets.GS4_SERVICE_ACCOUNT_KEY }}" > service-account.json
+
+      - name: 🛠️ Authenticate and Render site
+        run: |
+          Rscript -e "library(googlesheets4); gs4_auth('service-account.json')"
+          quarto render
+          
+      - name: 📄 Generate resume into PDF Format by running R code
+        run: Rscript export_resume.R
+
+      - name: 🚀 Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages

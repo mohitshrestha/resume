@@ -6,7 +6,7 @@ col_br <- function(col){
     )
 }
 
-col_br_loc <- function(col){
+col_br_location <- function(col){
     dplyr::if_else(
         !is.na(col) & col != "N/A|NA", 
         paste0('<br><i class="fa-solid fa-location-dot"></i> ', col),
@@ -18,7 +18,7 @@ create_section <- function(cv_data, section_name){
     cv_data |>
         dplyr::mutate(in_resume = as.character(in_resume),
                       end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                      loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                      location = dplyr::if_else(location == "Online", NA_character_, location)) |>
         dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
         dplyr::select(section:description_3) |>
         dplyr::arrange(desc(end), desc(start)) |>
@@ -35,14 +35,14 @@ create_section <- function(cv_data, section_name){
         dplyr::mutate(
             main_text =
                 glue::glue(
-                    "**{title}** <br> *{col_br(institution)}* {col_br_loc(loc)}
+                    "**{title}** <br> *{col_br(institution)}* {col_br_location(location)}
           - {col_br(description_1)}
           - {col_br(description_2)} 
           - {col_br(description_3)}"),
             .after = date
         ) |>
-        dplyr::select(-c(start, end, section, title, institution, loc, description_1, description_2, description_3)) |>
-        gt::gt(id = "section") |>
+        dplyr::select(-c(start, end, section, title, institution, location, description_1, description_2, description_3)) |>
+        gt::gt() |>
         gt::fmt_markdown(columns = c(date, main_text)) |> 
         gt::tab_options(column_labels.hidden = TRUE, table.width = gt::pct(100),
                         table.border.top.style = "hidden",
@@ -54,7 +54,7 @@ create_education_section <- function(cv_data, section_name){
     cv_data |>
         dplyr::mutate(in_resume = as.character(in_resume),
                       end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                      loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                      location = dplyr::if_else(location == "Online", NA_character_, location)) |>
         dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
         dplyr::select(section:description_3) |>
         dplyr::arrange(desc(end), desc(start)) |>
@@ -71,23 +71,16 @@ create_education_section <- function(cv_data, section_name){
         dplyr::mutate(
             main_text =
                 glue::glue(
-                    "**{title}** <br> *{col_br(institution)}* {col_br_loc(loc)} <br> {col_br(description_1)}"),
+                    "**{title}** <br> *{col_br(institution)}* {col_br_location(location)} <br> {col_br(description_1)}"),
             .after = date
         ) |>
-        dplyr::select(-c(start, end, section, title, institution, loc, description_1, description_2, description_3)) |>
-        gt::gt(id = "education_section") |>
-        gt::tab_style(
-            style = "padding-top:12px;padding-bottom:12px;",
-            locations = gt::cells_column_labels()) |> 
+        dplyr::select(-c(start, end, section, title, institution, location, description_1, description_2, description_3)) |>
+        gt::gt() |>
         gt::fmt_markdown(columns = c(date, main_text)) |>
         gt::tab_options(column_labels.hidden = TRUE, 
                         table.width = gt::pct(100), 
                         table.border.top.style = "hidden",
-                        table.border.bottom.style = "hidden",
-                        heading.padding = gt::px(0),
-                        row_group.padding = gt::px(0),
-                        data_row.padding = gt::px(0),
-                        summary_row.padding = gt::px(0)
+                        table.border.bottom.style = "hidden"
         ) |> 
         gt::cols_align(align = "left", columns = main_text)
 }
@@ -96,7 +89,7 @@ create_projects_section <- function(cv_data, section_name){
     cv_data |>
         dplyr::mutate(in_resume = as.character(in_resume),
                       end = tidyr::replace_na(end, (lubridate::ymd(Sys.Date()))),
-                      loc = dplyr::if_else(loc == "Online", NA_character_, loc)) |>
+                      location = dplyr::if_else(location == "Online", NA_character_, location)) |>
         dplyr::filter(in_resume %in% c("TRUE"), section == section_name) |>
         dplyr::select(section:description_3) |>
         dplyr::arrange(desc(end), desc(start)) |>
@@ -131,8 +124,8 @@ create_projects_section <- function(cv_data, section_name){
         dplyr::mutate(
             main_text = glue::glue("{main_header} {main_description}"),
             .after = date) |> 
-        dplyr::select(-c(start, end, date, section, title, institution, loc, description_1, description_2, description_3, main_header, main_description)) |>
-        gt::gt(id = "projects_section") |>
+        dplyr::select(-c(start, end, date, section, title, institution, location, description_1, description_2, description_3, main_header, main_description)) |>
+        gt::gt() |>
         #gt::fmt_markdown(columns = c(date, main_text)) |> 
         gt::fmt_markdown(columns = c(main_text)) |> 
         gt::tab_options(column_labels.hidden = TRUE, table.width = gt::pct(100),

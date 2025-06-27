@@ -1,10 +1,14 @@
 ---
 title: ""
+author: ""
+navbar: false
+
 format: 
   html:
     theme: journal
-    css: style.css
+    css: custom.css
 editor: visual
+
 knitr:
   opts_chunk: 
     echo: false
@@ -15,7 +19,10 @@ knitr:
 ```{r}
 #| include: false
 #| cache: false
-googlesheets4::gs4_deauth()
+
+googlesheets4::gs4_auth(path = "service-account.json")
+googlesheets4::gs4_user()
+
 cv_url <- "https://docs.google.com/spreadsheets/d/1nCw7ECSatsVa0cj-8g41b5qf3WX23PcSe3eWOXgkAuI/edit?usp=sharing"
 cv <- googlesheets4::read_sheet(cv_url,
                                 sheet = "entries",
@@ -33,7 +40,7 @@ cv <- googlesheets4::read_sheet(cv_url,
 
 <!-- Sidebar -->
 
-::: {#name .grid}
+::::: {#name .grid}
 ::: g-col-4
 <center><a href='https://mohitshrestha.com.np' target='_blank'> ![](https://avatars.githubusercontent.com/u/47285145?v=4){width="80%" style="border-radius: 50%;"}</center>
 
@@ -74,7 +81,7 @@ Conducted one-on-one remote tutoring sessions for new cohort of MSBA students on
 ::: g-col-8
 <!-- Main content -->
 
-<h1><p class="name">Mohit Shrestha</p></h1>
+# Mohit Shrestha
 
 I am well versed in R, Python, SAS, SQL, Tableau, and Power BI and specializes in data modeling and wrangling, building ML/AI models, analyzing and interpreting model results, and presenting impactful data insights to drive successful business solutions.
 
@@ -90,7 +97,7 @@ create_section(cv, "industry_positions")
 create_education_section(cv, "education")
 ```
 :::
-:::
+:::::
 
 ## <i class="fa-solid fa-chalkboard-user"></i> Selected Academic Research and Data Analytics projects
 
