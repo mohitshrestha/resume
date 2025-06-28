@@ -45,6 +45,7 @@ jobs:
             any::lubridate
             any::glue
             any::gt
+            any::fontawesome
             any::pagedown
             any::pdftools
             any::fs
