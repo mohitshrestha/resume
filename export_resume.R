@@ -15,8 +15,10 @@ total_pages <- pdf_info(pdf_path)$pages
 
 pages_to_keep <- seq_len(total_pages)  # All pages
 
-# Step 4: Subset the PDF to just those pages
+# Step 4: Subset the PDF to just those pages and overwrite the original
 trimmed_pdf <- pdf_subset(pdf_path, pages = pages_to_keep)
 
-# Step 5: Overwrite original with trimmed version
-file_copy(trimmed_pdf, pdf_path, overwrite = TRUE)
+# Step 5: Overwrite original PDF with trimmed version (ensure no extra file is created)
+result <- file.rename(trimmed_pdf, pdf_path)  # Overwrite directly without creating a second file
+
+invisible(result) # suppress TRUE in console
