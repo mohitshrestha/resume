@@ -49,11 +49,14 @@ jobs:
       - name: 🔐 Write service account key to file
         run: echo "${{ secrets.GS4_SERVICE_ACCOUNT_KEY }}" > service-account.json
 
-      - name: 🛠️ Authenticate and Render site
+      - name: 🛠️ Authenticate with Google Sheets API
         run: |
-          Rscript -e "library(googlesheets4); gs4_auth('service-account.json')"
+          Rscript -e "library(googlesheets4); gs4_auth('service-account.json', scopes = 'https://www.googleapis.com/auth/spreadsheets')"
+
+      - name: 🛠️ Render site with Quarto
+        run: |
           quarto render
-          
+
       - name: 📄 Generate resume into PDF Format by running R code
         run: Rscript export_resume.R
 

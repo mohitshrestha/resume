@@ -6,7 +6,7 @@ navbar: false
 format: 
   html:
     theme: journal
-    css: custom.css
+    css: styles.css
 editor: visual
 
 knitr:
@@ -20,7 +20,7 @@ knitr:
 #| include: false
 #| cache: false
 
-googlesheets4::gs4_auth(path = "service-account.json")
+googlesheets4::gs4_auth(path = "service-account.json", scopes = "https://www.googleapis.com/auth/spreadsheets")
 googlesheets4::gs4_user()
 
 cv_url <- "https://docs.google.com/spreadsheets/d/1nCw7ECSatsVa0cj-8g41b5qf3WX23PcSe3eWOXgkAuI/edit?usp=sharing"
