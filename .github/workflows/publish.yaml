@@ -50,12 +50,13 @@ jobs:
             any::pdftools
             any::fs
 
-      - name: 🔐 Write service account key to file
-        run: echo "${{ secrets.GS4_SERVICE_ACCOUNT_KEY }}" > service-account.json
+      - name: 🔐 Decode service account key from base64
+        run: |
+          echo "${{ secrets.GS4_SERVICE_ACCOUNT_B64 }}" | base64 -d > service-account.json
 
       - name: 🛠️ Authenticate with Google Sheets API
         run: |
-          Rscript -e "library(googlesheets4); gs4_auth('service-account.json', scopes = 'https://www.googleapis.com/auth/spreadsheets')"
+          Rscript -e "library(googlesheets4); gs4_auth(path = 'service-account.json', scopes = 'https://www.googleapis.com/auth/spreadsheets')"
 
       - name: 🛠️ Render site with Quarto
         run: |
