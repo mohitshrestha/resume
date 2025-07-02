@@ -56,7 +56,7 @@ jobs:
 
       - name: 🛠️ Authenticate with Google Sheets API
         run: |
-          Rscript -e "library(googlesheets4); gs4_auth(path = 'service-account.json', scopes = 'https://www.googleapis.com/auth/spreadsheets')"
+          Rscript -e "library(googlesheets4); gs4_auth(path = 'service-account.json', email = 'mohit-shrestha-resume@mohit-shrestha-resume.iam.gserviceaccount.com', scopes = 'https://www.googleapis.com/auth/spreadsheets')"
 
       - name: 🛠️ Render site with Quarto
         run: |
